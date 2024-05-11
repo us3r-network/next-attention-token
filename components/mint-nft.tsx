@@ -20,27 +20,6 @@ export default function MintNFT() {
   //   });
   // }, [config, address]);
 
-  const mintAttNFT = useCallback(async () => {
-    const payTokenAllowance = (await readContract(config, {
-      address: PayToken.address as `0x${string}`,
-      abi: PayToken.abi,
-      functionName: "balanceOf",
-      args: [address],
-    })) as bigint;
-    await writeContract(config, {
-      address: PayToken.address as `0x${string}`,
-      abi: PayToken.abi,
-      functionName: "approve",
-      args: [AttToken.address as `0x${string}`, payTokenAllowance],
-    });
-    await writeContract(config, {
-      address: AttToken.address as `0x${string}`,
-      abi: AttToken.abi,
-      functionName: "mintNFT",
-      args: [2, 4 * 1e5 * 10 ** 18],
-    });
-  }, [config, address]);
-
   const getMintNFTPrice = useCallback(async () => {
     const data = (await readContract(config, {
       address: AttToken.address as `0x${string}`,
@@ -49,6 +28,56 @@ export default function MintNFT() {
       args: [1],
     })) as bigint;
     console.log("mint nft price", formatEther(data));
+    return data;
+  }, [config]);
+
+  const mintAttNFT = useCallback(async () => {
+    const payTokenAllowance = (await readContract(config, {
+      address: PayToken.address as `0x${string}`,
+      abi: PayToken.abi,
+      functionName: "balanceOf",
+      args: [address],
+    })) as bigint;
+    console.log({ payTokenAllowance });
+
+    const mintPrice = await getMintNFTPrice();
+    console.log({ mintPrice });
+    if (payTokenAllowance < mintPrice) {
+      alert("insufficient balance");
+    }
+
+    const remainedAllowance = (await readContract(config, {
+      address: PayToken.address as `0x${string}`,
+      abi: PayToken.abi,
+      functionName: "allowance",
+      args: [address, AttToken.address as `0x${string}`],
+    })) as bigint;
+    console.log({ remainedAllowance });
+
+    if (remainedAllowance < mintPrice) {
+      await writeContract(config, {
+        address: PayToken.address as `0x${string}`,
+        abi: PayToken.abi,
+        functionName: "approve",
+        args: [AttToken.address as `0x${string}`, payTokenAllowance],
+      });
+    }
+
+    await writeContract(config, {
+      address: AttToken.address as `0x${string}`,
+      abi: AttToken.abi,
+      functionName: "mintNFT",
+      args: [1, mintPrice],
+    });
+  }, [config, address, getMintNFTPrice]);
+
+  const burnAttNFT = useCallback(async () => {
+    await writeContract(config, {
+      address: AttToken.address as `0x${string}`,
+      abi: AttToken.abi,
+      functionName: "burnNFT",
+      args: [1],
+    });
   }, [config]);
 
   const printTokenAndNFT = useCallback(async () => {
@@ -96,11 +125,12 @@ export default function MintNFT() {
     <div className="flex flex-col">
       {/* <Button onClick={mintToken}>mint token</Button> */}
 
-      <Button onClick={mintAttNFT}>mint nft</Button>
+      <Button onClick={mintAttNFT}>mintNFT</Button>
+      <Button onClick={burnAttNFT}>burnNFT</Button>
       <Button onClick={printTokenAndNFT}>printTokenAndNft</Button>
       <Button onClick={printMirror}>printMirror </Button>
       <Button onClick={printBoundingCurve}>printBoundingCurve </Button>
-      <Button onClick={getMintNFTPrice}>getMintNFTPrice </Button>
+      <Button onClick={getMintNFTPrice}>getMintNFTPrice</Button>
     </div>
   );
 }
