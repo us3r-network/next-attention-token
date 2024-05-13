@@ -56,7 +56,7 @@ export default function DeployNewAtt() {
   return (
     <div>
       <form onSubmit={createNewAttToken}>
-        <Input placeholder="ATT token name" name="att-token-name" />
+        {/* <Input placeholder="ATT token name" name="att-token-name" />
         <Input placeholder="ATT token symbol" name="att-token-symbol" />
         <Input placeholder="ATT token uri" name="att-token-uri" />
         <Input placeholder="ATT token admin addr" name="att-token-admin" />
@@ -65,7 +65,7 @@ export default function DeployNewAtt() {
           name="att-token-admin-fee"
         />
         <Input placeholder="ATT token pay token" name="att-token-pay-token" />
-        <Input placeholder="ATT token base price" name="att-token-base-price" />
+        <Input placeholder="ATT token base price" name="att-token-base-price" /> */}
         <Button type="submit">Deploy New Attention Token</Button>
       </form>
     </div>
