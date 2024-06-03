@@ -48,6 +48,7 @@ const config = getDefaultConfig({
   ],
   chains: [
     mainnet,
+    sepolia,
     polygon,
     optimism,
     arbitrum,

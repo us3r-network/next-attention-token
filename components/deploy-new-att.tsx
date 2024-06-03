@@ -36,8 +36,8 @@ export default function DeployNewAtt() {
         functionName: "deploy",
         args: [
           {
-            name: "ATT Token Second",
-            symbol: "TATTS",
+            name: "ATT Token Third",
+            symbol: "ATT3",
             basePrice: 1e3,
             linearPriceSlope: 1e2,
             inflectionPrice: 1e2 * 845,

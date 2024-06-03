@@ -5,6 +5,7 @@ import WagmiCtx from "@/components/wagmi-provider";
 
 import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
+import WalletConnectBtn from "@/components/wallet-connect-btn";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,7 +26,10 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <WagmiCtx>{children}</WagmiCtx>
+        <WagmiCtx>
+          <WalletConnectBtn />
+          {children}
+        </WagmiCtx>
       </body>
     </html>
   );

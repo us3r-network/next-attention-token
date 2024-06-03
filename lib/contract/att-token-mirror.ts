@@ -1,5 +1,5 @@
 export const AttTokenMirror = {
-  address: "0x68C2c54f7b6527C3e637F5c55f07d01F814B7126",
+  address: "0x0D0a7DD948EFa7F7af542D6c6e1eb7aF0d83c667",
   abi: [
     {
       type: "constructor",

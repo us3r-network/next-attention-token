@@ -1,5 +1,5 @@
 export const AttToken = {
-  address: "0x83B1B6a7879641a0BC956D83a3d9C3FBE9e9d556",
+  address: "0x82d5Df56124dD79bDe750f5d680fa36147F979EE",
   abi: [
     {
       type: "constructor",
@@ -55,10 +55,59 @@ export const AttToken = {
     },
     {
       type: "function",
+      name: "WETH",
+      inputs: [],
+      outputs: [{ name: "", type: "address", internalType: "address" }],
+      stateMutability: "view",
+    },
+    {
+      type: "function",
       name: "_payToken",
       inputs: [],
       outputs: [{ name: "", type: "address", internalType: "contract IERC20" }],
       stateMutability: "view",
+    },
+    {
+      type: "function",
+      name: "addLiquidity",
+      inputs: [
+        { name: "_tokenA", type: "address", internalType: "address" },
+        { name: "_tokenB", type: "address", internalType: "address" },
+        { name: "_amountA", type: "uint256", internalType: "uint256" },
+        { name: "_amountB", type: "uint256", internalType: "uint256" },
+      ],
+      outputs: [],
+      stateMutability: "nonpayable",
+    },
+    {
+      type: "function",
+      name: "addLiquidityAP",
+      inputs: [
+        { name: "_tokenA", type: "address", internalType: "address" },
+        { name: "_amountA", type: "uint256", internalType: "uint256" },
+        { name: "_payToken", type: "address", internalType: "address" },
+        { name: "_amountPay", type: "uint256", internalType: "uint256" },
+      ],
+      outputs: [],
+      stateMutability: "nonpayable",
+    },
+    {
+      type: "function",
+      name: "addUniswapLiquidity",
+      inputs: [
+        {
+          name: "payTokenAmount",
+          type: "uint256",
+          internalType: "uint256",
+        },
+        {
+          name: "attTokenAmoun",
+          type: "uint256",
+          internalType: "uint256",
+        },
+      ],
+      outputs: [],
+      stateMutability: "nonpayable",
     },
     {
       type: "function",
@@ -182,6 +231,13 @@ export const AttToken = {
         { name: "_nftPrice", type: "uint256", internalType: "uint256" },
         { name: "_adminFee", type: "uint256", internalType: "uint256" },
       ],
+      stateMutability: "view",
+    },
+    {
+      type: "function",
+      name: "getPair",
+      inputs: [],
+      outputs: [{ name: "", type: "address", internalType: "address" }],
       stateMutability: "view",
     },
     {
@@ -355,6 +411,61 @@ export const AttToken = {
     },
     {
       type: "event",
+      name: "AttentionTokenCreated",
+      inputs: [
+        {
+          name: "name",
+          type: "string",
+          indexed: false,
+          internalType: "string",
+        },
+        {
+          name: "symbol",
+          type: "string",
+          indexed: false,
+          internalType: "string",
+        },
+        {
+          name: "admin",
+          type: "address",
+          indexed: false,
+          internalType: "address",
+        },
+        {
+          name: "adminFee",
+          type: "uint256",
+          indexed: false,
+          internalType: "uint256",
+        },
+        {
+          name: "initialTokenSupply",
+          type: "uint96",
+          indexed: false,
+          internalType: "uint96",
+        },
+        {
+          name: "initialSupplyOwner",
+          type: "address",
+          indexed: false,
+          internalType: "address",
+        },
+        {
+          name: "payToken",
+          type: "address",
+          indexed: false,
+          internalType: "contract IERC20",
+        },
+        {
+          name: "bondingCurve",
+          type: "address",
+          indexed: false,
+          internalType: "contract IBondingCurve",
+        },
+      ],
+      anonymous: false,
+    },
+    {
+      type: "event",
       name: "BurnNFT",
       inputs: [
         {
@@ -370,6 +481,12 @@ export const AttToken = {
           internalType: "uint256",
         },
       ],
+      anonymous: false,
+    },
+    {
+      type: "event",
+      name: "LiquidityCreated",
+      inputs: [],
       anonymous: false,
     },
     {
@@ -480,6 +597,16 @@ export const AttToken = {
       ],
       anonymous: false,
     },
+    {
+      type: "error",
+      name: "AddressEmptyCode",
+      inputs: [{ name: "target", type: "address", internalType: "address" }],
+    },
+    {
+      type: "error",
+      name: "AddressInsufficientBalance",
+      inputs: [{ name: "account", type: "address", internalType: "address" }],
+    },
     { type: "error", name: "AlreadyInitialized", inputs: [] },
     {
       type: "error",
@@ -504,6 +631,7 @@ export const AttToken = {
     },
     { type: "error", name: "DNAlreadyInitialized", inputs: [] },
     { type: "error", name: "DNNotInitialized", inputs: [] },
+    { type: "error", name: "FailedInnerCall", inputs: [] },
     { type: "error", name: "FnSelectorNotRecognized", inputs: [] },
     { type: "error", name: "InsufficientAllowance", inputs: [] },
     { type: "error", name: "InsufficientBalance", inputs: [] },
@@ -512,6 +640,11 @@ export const AttToken = {
     { type: "error", name: "MirrorAddressIsZero", inputs: [] },
     { type: "error", name: "NewOwnerIsZeroAddress", inputs: [] },
     { type: "error", name: "NoHandoverRequest", inputs: [] },
+    {
+      type: "error",
+      name: "SafeERC20FailedOperation",
+      inputs: [{ name: "token", type: "address", internalType: "address" }],
+    },
     { type: "error", name: "SenderNotMirror", inputs: [] },
     { type: "error", name: "TokenDoesNotExist", inputs: [] },
     { type: "error", name: "TotalSupplyOverflow", inputs: [] },
