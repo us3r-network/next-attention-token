@@ -15,24 +15,24 @@ export function AddAPUniLP() {
   const config = useConfig();
 
   const addUniLP = useCallback(async () => {
-    await writeContract(config, {
-      address: TokenA.address as `0x${string}`,
-      abi: TokenA.abi,
-      functionName: "approve",
-      args: [AttToken.address as `0x${string}`, 1e64],
-    });
-    await writeContract(config, {
-      address: PayToken.address as `0x${string}`,
-      abi: PayToken.abi,
-      functionName: "approve",
-      args: [AttToken.address as `0x${string}`, 1e64],
-    });
+    // await writeContract(config, {
+    //   address: TokenA.address as `0x${string}`,
+    //   abi: TokenA.abi,
+    //   functionName: "approve",
+    //   args: [AttToken.address as `0x${string}`, 1e64],
+    // });
+    // await writeContract(config, {
+    //   address: PayToken.address as `0x${string}`,
+    //   abi: PayToken.abi,
+    //   functionName: "approve",
+    //   args: [AttToken.address as `0x${string}`, 1e64],
+    // });
 
     await writeContract(config, {
       address: AttToken.address as `0x${string}`,
       abi: AttToken.abi,
       functionName: "addLiquidityAP",
-      args: [TokenA.address, 10 * 1e18, PayToken.address, 30 * 1e18],
+      args: [TokenA.address, 10 * 1e18, 30 * 1e18],
     });
   }, [config]);
 

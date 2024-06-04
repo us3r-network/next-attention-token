@@ -1,5 +1,5 @@
 export const AttentionFactory = {
-  address: "0x43E59F902e450AbC7498d07bba4cD4e7A4c2abAa",
+  address: "0x379f5EC0E2D117D3d9C0e9Da35ec0BbBBF1ec80d",
   abi: [
     {
       type: "function",

@@ -1,5 +1,5 @@
 export const AttToken = {
-  address: "0x82d5Df56124dD79bDe750f5d680fa36147F979EE",
+  address: "0x1b8f0C819d3b925B0696A25B2A31AF507c8b7687",
   abi: [
     {
       type: "constructor",
@@ -85,7 +85,6 @@ export const AttToken = {
       inputs: [
         { name: "_tokenA", type: "address", internalType: "address" },
         { name: "_amountA", type: "uint256", internalType: "uint256" },
-        { name: "_payToken", type: "address", internalType: "address" },
         { name: "_amountPay", type: "uint256", internalType: "uint256" },
       ],
       outputs: [],
